@@ -3,34 +3,24 @@ const userNameInput = document.getElementById('user-name');
 const assessmentButton = document.getElementById('assessment');
 const resultDivided = document.getElementById('result-area');
 const tweetDivided = document.getElementById('tweet-area');
-
-
 function removeAllChildren(element) {
   while (element.firstChild) {
-
     element.removeChild(element.firstChild);
   }
 }
-
 assessmentButton.onclick = () => {
   const userName = userNameInput.value;
-  if (userName.length === 0) {
-   
+  if (userName.length === 0) {  
     return;
   }
-
-
   removeAllChildren(resultDivided);
   const header = document.createElement('h3');
   header.innerText = '診断結果';
   resultDivided.appendChild(header);
-
   const paragraph = document.createElement('p');
   const result = assessment(userName);
   paragraph.innerText = result;
   resultDivided.appendChild(paragraph);
-
-
   removeAllChildren(tweetDivided);
   const anchor = document.createElement('a');
   const hrefValue =
@@ -42,13 +32,10 @@ assessmentButton.onclick = () => {
   anchor.setAttribute('data-text', result);
   anchor.innerText = 'Tweet #あなたのいいところ';
   tweetDivided.appendChild(anchor);
-
-
   const script = document.createElement('script');
   script.setAttribute('src', 'https://platform.twitter.com/widgets.js');
   tweetDivided.appendChild(script);
 };
-
 const answers = [
   '{userName}のいいところは声です。{userName}の特徴的な声はみなを惹きつけ、心に残ります。',
   '{userName}のいいところはまなざしです。{userName}に見つめられた人は、気になって仕方がないでしょう。',
@@ -67,22 +54,16 @@ const answers = [
   '{userName}のいいところはその全てです。ありのままの{userName}自身がいいところなのです。',
   '{userName}のいいところは自制心です。やばいと思ったときにしっかりと衝動を抑えられる{userName}が皆から評価されています。'
 ];
-
 function assessment(userName) {
-
   let sumOfcharCode = 0;
   for (let i = 0; i < userName.length; i++) {
     sumOfcharCode = sumOfcharCode + userName.charCodeAt(i);
   }
-
   const index = sumOfcharCode % answers.length;
   let result = answers[index];
-
   result = result.replaceAll('{userName}', userName);
   return result;
 }
-
-
 console.assert(
   assessment('太郎') ===
     '太郎のいいところは決断力です。太郎がする決断にいつも助けられる人がいます。',
