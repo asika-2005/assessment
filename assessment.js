@@ -77,4 +77,3 @@ userNameInput.onkeydown = event => {
   if (event.key === 'Enter') {
   }
 };
-
