@@ -75,5 +75,6 @@ console.assert(
 );
 userNameInput.onkeydown = event => {
   if (event.key === 'Enter') {
+     assessmentButton.onclick();
   }
 };
